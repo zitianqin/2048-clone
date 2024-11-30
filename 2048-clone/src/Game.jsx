@@ -10,7 +10,7 @@ const initialiseGame = () => {
   ];
 };
 
-const slideLeft = (gameValues) => {
+const slideLeft = (gameValues, merge = true) => {
   // Move everything left
   const board = [...gameValues];
   for (let row in gameValues) {
@@ -27,10 +27,33 @@ const slideLeft = (gameValues) => {
     }
   }
 
+  if (merge) {
+    // Merge adjacent tiles that have the same value
+    console.log(merge);
+    for (let row in board) {
+      if (board[row][0] === board[row][1]) {
+        board[row][0] = board[row][0] * 2;
+        board[row][1] = 0;
+      }
+
+      if (board[row][1] === board[row][2]) {
+        board[row][1] = board[row][1] * 2;
+        board[row][2] = 0;
+      }
+
+      if (board[row][2] === board[row][3]) {
+        board[row][2] = board[row][2] * 2;
+        board[row][3] = 0;
+      }
+    }
+
+    return slideLeft(board, false);
+  }
+
   return board;
 };
 
-const slideRight = (gameValues) => {
+const slideRight = (gameValues, merge = true) => {
   // Move everything right
   const board = [...gameValues];
   for (let row in gameValues) {
@@ -46,6 +69,29 @@ const slideRight = (gameValues) => {
       board[row].push(0);
     }
     board[row].push(...nonZeroRow);
+  }
+
+  if (merge) {
+    // Merge adjacent tiles that have the same value
+    console.log(merge);
+    for (let row in board) {
+      if (board[row][0] === board[row][1]) {
+        board[row][0] = board[row][0] * 2;
+        board[row][1] = 0;
+      }
+
+      if (board[row][1] === board[row][2]) {
+        board[row][1] = board[row][1] * 2;
+        board[row][2] = 0;
+      }
+
+      if (board[row][2] === board[row][3]) {
+        board[row][2] = board[row][2] * 2;
+        board[row][3] = 0;
+      }
+    }
+
+    return slideRight(board, false);
   }
 
   return board;
