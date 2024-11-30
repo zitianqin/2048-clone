@@ -2,7 +2,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 const StyledGameCell = styled.td`
-  background-color: ${(props) => props.bgColour};
+  background-color: ${(props) => props.$bgColour};
 `;
 
 function GameCell({ value }) {
@@ -49,17 +49,14 @@ function GameCell({ value }) {
   }
 
   return (
-    <StyledGameCell
-      bgColour={bgColour}
-      className="w-[25%] border-solid border-[10px] bg-red-500 text-center text-4xl font-bold"
-    >
+    <StyledGameCell $bgColour={bgColour} className="w-[25%] border-solid border-[10px] text-center text-4xl font-bold">
       {value !== 0 ? value : ""}
     </StyledGameCell>
   );
 }
 
 GameCell.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
 };
 
 export default GameCell;
